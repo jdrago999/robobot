@@ -1,5 +1,5 @@
 
-# Stubby
+# Stubber
 
 ## Usage
 
