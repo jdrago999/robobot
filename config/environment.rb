@@ -2,9 +2,6 @@ ENV['APP_ENV'] ||= 'development'
 require 'bundler'
 Bundler.require(:default, ENV['APP_ENV'])
 
-require 'dotenv'
-Dotenv.load
-
 require 'active_support/all'
 require 'byebug'
 require 'pp'

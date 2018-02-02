@@ -5,9 +5,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'config/environment'
 
+require 'dotenv'
+Dotenv.load
+
 Stubber.configure do |config|
   config.node_id = ENV.fetch('NODE_ID')
-  config.redis = Redis.new(url: 'redis://%s:6379/0' % ENV['REDIS_HOSTNAME'])
+  config.redis = Redis.new(url: ENV.fetch('REDIS_URL'))
 end
 server = Stubber::Server.new
 server.listen!

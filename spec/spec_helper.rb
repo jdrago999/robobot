@@ -1,4 +1,10 @@
 ENV['APP_ENV'] ||= 'test'
+require 'simplecov'
+SimpleCov.start do
+  add_filter 'spec/'
+  add_filter 'bin/'
+end
+SimpleCov.minimum_coverage 100
 
 lib = File.expand_path('../../', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
@@ -7,7 +13,6 @@ require 'config/environment'
 
 require 'rspec'
 require 'shoulda-matchers'
-require 'factory_bot'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
