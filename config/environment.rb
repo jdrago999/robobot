@@ -9,6 +9,9 @@ require 'ostruct'
 
 lib = File.expand_path('../../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'lib/stubber'
+require 'lib/stubber/worker'
+require 'lib/stubber/server'
 
 Dir['lib/**/*.rb'].each do |file|
   require file

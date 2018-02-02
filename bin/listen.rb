@@ -12,5 +12,5 @@ Stubber.configure do |config|
   config.node_id = ENV.fetch('NODE_ID')
   config.redis = Redis.new(url: ENV.fetch('REDIS_URL'))
 end
-server = Stubber::Server.new
+server = Stubber::Server.new(worker: Stubber::Win7Worker.new)
 server.listen!

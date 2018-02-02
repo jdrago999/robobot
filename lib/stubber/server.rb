@@ -13,10 +13,10 @@ module Stubber
       loop do
         list, task_raw = redis.blpop(task_key)
         next unless list == task_key && task_raw
-        task = JSON.parse(task_raw)
-        return_path = task.fetch('return_path')
-        action = task['action']
-        args = task.fetch('args')
+        task = JSON.parse(task_raw, symbolize_names: true)
+        return_path = task.fetch(:return_path)
+        action = task[:action]
+        args = task.fetch(:args)
         case action
         when 'stop'
           stop!(return_path: return_path)
@@ -28,6 +28,7 @@ module Stubber
               status: :success,
               result: result
             }.to_json
+            logger.info '%s->%s(%s) = %s' % [worker.class, action, args, result]
             redis.rpush(return_path, result_json)
           rescue => e
             result_json = {
@@ -40,7 +41,6 @@ module Stubber
             redis.rpush(return_path, result_json)
             logger.error 'Unhandled task: "%s"' % task_raw
           end
-          next
         end
       end
     end
