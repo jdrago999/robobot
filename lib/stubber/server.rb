@@ -11,7 +11,7 @@ module Stubber
     def listen!
       logger.info 'Waiting for message for %s' % task_key
       loop do
-        list, task_raw = redis.blpop(task_key)
+        list, task_raw = worker.redis.blpop(task_key)
         next unless list == task_key && task_raw
         task = JSON.parse(task_raw, symbolize_names: true)
         return_path = task.fetch(:return_path)
@@ -29,7 +29,7 @@ module Stubber
               result: result
             }.to_json
             logger.info '%s->%s(%s) = %s' % [worker.class, action, args, result]
-            redis.rpush(return_path, result_json)
+            worker.redis.rpush(return_path, result_json)
           rescue => e
             result_json = {
               status: :error,
@@ -38,7 +38,7 @@ module Stubber
                 message: e.to_s
               }
             }.to_json
-            redis.rpush(return_path, result_json)
+            worker.redis.rpush(return_path, result_json)
             logger.error 'Unhandled task: "%s"' % task_raw
           end
         end
@@ -46,15 +46,7 @@ module Stubber
     end
 
     def task_key
-      'task:%s' % node_id
-    end
-
-    def node_id
-      Stubber.node_id
-    end
-
-    def redis
-      Stubber.redis
+      'task:%s' % worker.node_id
     end
 
     private
@@ -64,7 +56,7 @@ module Stubber
         status: :success,
         result: :ok
       }.to_json
-      redis.rpush(return_path, result_json)
+      worker.redis.rpush(return_path, result_json)
     end
 
     def logger

@@ -57,7 +57,6 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   spring
-  tzinfo-data
 
 BUNDLED WITH
    1.16.1
