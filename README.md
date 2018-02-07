@@ -1,6 +1,8 @@
 
 # Robobot
 
+![Robobot](doc/robobot.png)
+
 ## Usage
 
 ```ruby
