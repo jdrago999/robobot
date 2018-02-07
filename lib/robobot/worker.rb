@@ -1,5 +1,5 @@
 
-module Stubber
+module Robobot
   class Worker
 
     attr_accessor :node_id, :redis

@@ -1,11 +1,16 @@
 
-module Stubber
+module Robobot
   class Server
 
-    attr_accessor :worker
+    attr_accessor :worker, :redis
 
     def initialize(worker:nil)
       self.worker = worker
+      self.redis = worker.redis
+    end
+
+    def node_id
+      worker.node_id
     end
 
     def listen!
@@ -29,7 +34,7 @@ module Stubber
               result: result
             }.to_json
             logger.info '%s->%s(%s) = %s' % [worker.class, action, args, result]
-            worker.redis.rpush(return_path, result_json)
+            redis.rpush(return_path, result_json)
           rescue => e
             result_json = {
               status: :error,
@@ -38,7 +43,7 @@ module Stubber
                 message: e.to_s
               }
             }.to_json
-            worker.redis.rpush(return_path, result_json)
+            redis.rpush(return_path, result_json)
             logger.error 'Unhandled task: "%s"' % task_raw
           end
         end
@@ -56,11 +61,11 @@ module Stubber
         status: :success,
         result: :ok
       }.to_json
-      worker.redis.rpush(return_path, result_json)
+      redis.rpush(return_path, result_json)
     end
 
     def logger
-      Stubber.logger
+      Robobot.logger
     end
 
   end
