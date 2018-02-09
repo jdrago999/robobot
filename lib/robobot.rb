@@ -1,5 +1,6 @@
 
 require 'redis'
+require 'logger'
 
 module Robobot
   class RemoteError < StandardError; end

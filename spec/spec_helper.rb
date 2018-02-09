@@ -9,10 +9,14 @@ SimpleCov.minimum_coverage 100
 lib = File.expand_path('../../', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'config/environment'
+require 'robobot-server'
+require 'robobot-client'
 
+require 'securerandom'
 require 'rspec'
 require 'shoulda-matchers'
+
+ENV['REDIS_URL'] ||= 'redis://127.0.0.1:6379/0'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

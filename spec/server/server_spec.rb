@@ -1,7 +1,7 @@
 
 describe Robobot::Server do
   before do
-    @redis = APP.redis
+    @redis = Redis.new(url: ENV.fetch('REDIS_URL'))
     @redis.keys('return-path:*').map{|x| @redis.del(x) }
     @redis.keys('task:*').map{|x| @redis.del(x) }
     @worker_klass = Class.new(Robobot::Worker)

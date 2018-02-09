@@ -6,6 +6,8 @@
 ## Usage
 
 ```ruby
+require 'robobot-server'
+
 class Win7 < Robobot::Worker
   def install_sensor!(version:, hostname:)
     command = 'TAObserveInstaller.%s.msi HOSTNAME=%s' % [version, hostname]
