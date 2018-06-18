@@ -2,10 +2,10 @@ Gem::Specification.new do |spec|
   spec.name        = 'robobot'
   spec.version     = '0.1.0'
   spec.authors     = ['John Drago']
-  spec.email       = 'jdrago@thinair.com'
-  spec.homepage    = 'https://github.com/ThinAir/robobot'
-  spec.summary     = 'ThinAir daemon for remote execution'
-  spec.description = 'ThinAir daemon for remote execution'
+  spec.email       = 'jdrago.999@gmail.com'
+  spec.homepage    = 'https://github.com/ThoriumCyber/robobot'
+  spec.summary     = 'ThoriumCyber daemon for remote execution'
+  spec.description = 'ThoriumCyber daemon for remote execution'
   spec.required_rubygems_version = '>= 1.3.6'
 
   spec.files         = Dir['**/*'].keep_if { |file| File.file?(file) }
