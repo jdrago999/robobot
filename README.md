@@ -9,8 +9,8 @@
 require 'robobot-server'
 
 class Win7 < Robobot::Worker
-  def install_sensor!(version:, hostname:)
-    command = 'TAObserveInstaller.%s.msi HOSTNAME=%s' % [version, hostname]
+  def install_sensor!(hostname:, token:)
+    command = './sensord install --org-hostname=%s --org-token=%s' % [hostname, token]
     system(command) or raise 'Error installing sensor!'
   end
 end
@@ -34,8 +34,8 @@ client = Robobot::Client.new(
 )
 begin
   result = client.install_sensor!(
-    version: '1.0.2.101',
-    hostname: 'tenant0.thinair.local'
+    token: 'org.cb76e0b8-6ecb-11e8-9c81-ef849100e9c8',
+    hostname: 't0000.thorium.local'
   )
 rescue Robobot::RemoteError => e
   raise e
