@@ -3,7 +3,7 @@ Gem::Specification.new do |spec|
   spec.version     = '0.1.0'
   spec.authors     = ['John Drago']
   spec.email       = 'drago@ambitrace.com'
-  spec.homepage    = 'https://github.com/ambitrace/robobot'
+  spec.homepage    = 'https://github.com/jdrago999/robobot'
   spec.summary     = 'Daemon for remote execution and testing'
   spec.description = 'Daemon for remote execution of tasks, eg: for testing software on a desktop OS'
   spec.required_rubygems_version = '>= 1.3.6'
