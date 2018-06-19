@@ -35,7 +35,7 @@ client = Robobot::Client.new(
 begin
   result = client.install_sensor!(
     token: 'org.cb76e0b8-6ecb-11e8-9c81-ef849100e9c8',
-    hostname: 't0000.thorium.local'
+    hostname: 't0000.ambitrace.local'
   )
 rescue Robobot::RemoteError => e
   raise e
